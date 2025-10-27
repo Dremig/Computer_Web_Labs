@@ -1,7 +1,12 @@
 #ifndef SPONGE_LIBSPONGE_BYTE_STREAM_HH
 #define SPONGE_LIBSPONGE_BYTE_STREAM_HH
 
+#include <cstddef>
+#include <cstdint>
+#include <deque>
+#include <list>
 #include <string>
+#include <utility>
 
 //! \brief An in-order byte stream.
 
@@ -11,19 +16,12 @@
 class ByteStream {
   private:
     // Your code here -- add private members as necessary.
-
-    // Hint: This doesn't need to be a sophisticated data structure at
-    // all, but if any of your tests are taking longer than a second,
-    // that's a sign that you probably want to keep exploring
-    // different approaches.
-
-    std::string buffer_;  //!< The internal buffer holding unread bytes.
-    size_t capacity_;     //!< Maximum capacity of the stream.
-    size_t bytes_written_; //!< Total bytes written to the stream.
-    size_t bytes_read_;   //!< Total bytes read from the stream.
-    bool input_ended_;    //!< Flag indicating input has ended.
-
-    bool _error{};  //!< Flag indicating that the stream suffered an error.
+    size_t _capacity{0};  //!< The maximum number of bytes that can be written.
+    size_t _bytes_written{0};  //!< Total number of bytes written to the stream.
+    size_t _bytes_read{0};  //!< Total number of bytes read from the stream.
+    std::deque<char> _buffer;  //!< The buffer holding the bytes.
+    bool _error{false};  //!< Flag indicating that the stream suffered an error.
+    bool _end_input{false};  //!< Flag indicating that the input has ended.
 
   public:
     //! Construct a stream with room for `capacity` bytes.
@@ -58,8 +56,12 @@ class ByteStream {
     void pop_output(const size_t len);
 
     //! Read (i.e., copy and then pop) the next "len" bytes of the stream
-    //! \returns a string
-    std::string read(const size_t len);
+    //! \returns a vector of bytes read
+    std::string read(const size_t len) {
+        const auto ret = peek_output(len);
+        pop_output(len);
+        return ret;
+    }
 
     //! \returns `true` if the stream input has ended
     bool input_ended() const;
@@ -89,3 +91,4 @@ class ByteStream {
 };
 
 #endif  // SPONGE_LIBSPONGE_BYTE_STREAM_HH
+
