@@ -30,13 +30,14 @@ void get_URL(const string &host, const string &path) {
                          "Connection: close\r\n\r\n";
         sock.write(request.data(), request.size());
 
-        char buf[1024];
+        string chunk;
         while (true) {
-            ssize_t byte_received = sock.read(buf, sizeof(buf));
+            chunk.clear();
+            ssize_t byte_received = sock.read(chunk, 1024);
             if (byte_received <= 0) {
                 break;
             }
-            cout.write(buf, byte_received);
+            cout << chunk;
         }
 
         sock.close();
