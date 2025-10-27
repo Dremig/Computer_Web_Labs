@@ -19,9 +19,9 @@ class ByteStream {
     size_t _capacity{0};  //!< The maximum number of bytes that can be written.
     size_t _bytes_written{0};  //!< Total number of bytes written to the stream.
     size_t _bytes_read{0};  //!< Total number of bytes read from the stream.
-    std::deque<char> _buffer;  //!< The buffer holding the bytes.
+    string _buffer;  //!< The buffer holding the bytes.
     bool _error{false};  //!< Flag indicating that the stream suffered an error.
-    bool _end_input{false};  //!< Flag indicating that the input has ended.
+    bool _input_ended{false};  //!< Flag indicating that the input has ended.
 
   public:
     //! Construct a stream with room for `capacity` bytes.
