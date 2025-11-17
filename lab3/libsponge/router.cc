@@ -37,44 +37,30 @@ void Router::add_route(const uint32_t route_prefix,
 
 //! \param[in] dgram The datagram to be routed
 void Router::route_one_datagram(InternetDatagram &dgram) {
-    // Get the destination IP address from the datagram header
-    auto dest = dgram.header().dst;
+    // 提取数值 dest（用于匹配和 next_hop）
+    const uint32_t dest_num = dgram.header().dst;
 
-    // Find the best (longest prefix) match in the routing table
+    // 查找最佳路由
     size_t best_length = 0;
-    Route best_route;
+    Route best_route;  // 默认构造（prefix=0，确保不匹配）
     for (const auto &r : _routes) {
-        // Compute the mask for this prefix length
         const uint32_t mask = 0xFFFFFFFFu << (32 - r.prefix_length);
-        // Check if the destination matches this route
-        if ((dest & mask) == (r.prefix & mask) && r.prefix_length > best_length) {
+        if ((dest_num & mask) == (r.prefix & mask) && r.prefix_length > best_length) {
             best_length = r.prefix_length;
             best_route = r;
         }
     }
 
-    // If no matching route, drop the datagram (do nothing)
-    if (best_length == 0) {
-        return;
-    }
+    if (best_length == 0) { return; }  // 无匹配，丢弃
 
-    // Check TTL: if already 0, drop
-    if (dgram.header().ttl == 0) {
-        return;
-    }
-
-    // Decrement TTL
+    if (dgram.header().ttl == 0) { return; }  // TTL=0，丢弃
     dgram.header().ttl--;
+    if (dgram.header().ttl == 0) { return; }  // 减后=0，丢弃
 
-    // If TTL now 0, drop
-    if (dgram.header().ttl == 0) {
-        return;
-    }
+    // next_hop：优先路由的 next_hop，否则用 dest
+    const Address next_hop_addr = best_route.next_hop.value_or(Address::from_ipv4_numeric(dest_num));
 
-    // Determine the next hop address: use the route's next_hop if present, otherwise the destination itself (direct route)
-    const Address next_hop_addr = best_route.next_hop.value_or(Address::from_ipv4_numeric(dest));
-
-    // Send the modified datagram via the appropriate interface
+    // 发送
     _interfaces.at(best_route.interface_num).send_datagram(dgram, next_hop_addr);
 }
 
