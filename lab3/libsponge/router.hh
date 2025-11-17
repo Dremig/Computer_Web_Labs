@@ -48,8 +48,8 @@ class Router {
         std::optional<Address> next_hop;
         size_t interface_num;
 
-        // Route(uint32_t p, uint8_t pl, std::optional<Address> nh, size_t in)
-        // : prefix(p), prefix_length(pl), next_hop(std::move(nh)), interface_num(in) {}
+        Route(uint32_t p, uint8_t pl, std::optional<Address> nh, size_t in)
+        : prefix(p), prefix_length(pl), next_hop(std::move(nh)), interface_num(in) {}
     };
 
     std::vector<Route> _routes{};
