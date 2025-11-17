@@ -66,99 +66,59 @@ void NetworkInterface::send_datagram(const InternetDatagram &dgram, const Addres
 
 //! \param[in] frame the incoming Ethernet frame
 optional<InternetDatagram> NetworkInterface::recv_frame(const EthernetFrame &frame) {
-    const EthernetHeader &ethernet_header = frame.header();
-    if (ethernet_header.dst != _ethernet_address && ethernet_header.dst != ETHERNET_BROADCAST) {
-        // none of our addresses match the destination, so ignore this frame
-        return {};
-    }
-    if (ethernet_header.type == EthernetHeader::TYPE_IPv4) {
-        InternetDatagram datagram;
-        if (datagram.parse(frame.payload()) == ParseResult::NoError) {
-            // successfully parsed the datagram
-            return datagram;
-        }
-    }
-    else if (ethernet_header.type == EthernetHeader::TYPE_ARP) {
-        ARPMessage arp_message;
-        if (arp_message.parse(frame.payload()) == ParseResult::NoError) {
-            _arp_table[arp_message.sender_ip_address].ethernet_address = arp_message.sender_ethernet_address;
-            _arp_table[arp_message.sender_ip_address].ttl = 30000;
-            if (arp_message.opcode == ARPMessage::OPCODE_REQUEST && arp_message.target_ip_address == _ip_address.ipv4_numeric()) {
-                ARPMessage arp_reply;
-                arp_reply.opcode = ARPMessage::OPCODE_REPLY;
-                arp_reply.sender_ethernet_address = _ethernet_address;
-                arp_reply.sender_ip_address = _ip_address.ipv4_numeric();
-                arp_reply.target_ethernet_address = arp_message.sender_ethernet_address;
-                arp_reply.target_ip_address = arp_message.sender_ip_address;
-                EthernetFrame rframe;
-                rframe.header().dst = arp_message.sender_ethernet_address;
-                rframe.header().src = _ethernet_address;
-                rframe.header().type = EthernetHeader::TYPE_ARP;
-                rframe.payload() = arp_reply.serialize();
-                _frames_out.push(std::move(rframe));
-            }
-            auto it = _pending_datagrams.find(arp_message.sender_ip_address);
-            if (it != _pending_datagrams.end()) {
-                // exist pending datagrams, so we send them out
-                for (const auto &datagram : it->second) {
-                    EthernetFrame pframe;
-                    pframe.header().dst = arp_message.sender_ethernet_address;
-                    pframe.header().src = _ethernet_address;
-                    pframe.header().type = EthernetHeader::TYPE_IPv4;
-                    pframe.payload() = datagram.serialize();
-                    _frames_out.push(std::move(pframe));
-                }
-                _pending_datagrams.erase(it);
-                _arp_request_timers.erase(arp_message.sender_ip_address);
-            }
-        }
-    }
-    // DUMMY_CODE(frame);
+    // const EthernetHeader &ethernet_header = frame.header();
+    // if (ethernet_header.dst != _ethernet_address && ethernet_header.dst != ETHERNET_BROADCAST) {
+    //     // none of our addresses match the destination, so ignore this frame
+    //     return {};
+    // }
+    // if (ethernet_header.type == EthernetHeader::TYPE_IPv4) {
+    //     InternetDatagram datagram;
+    //     if (datagram.parse(frame.payload()) == ParseResult::NoError) {
+    //         // successfully parsed the datagram
+    //         return datagram;
+    //     }
+    // }
+    // else if (ethernet_header.type == EthernetHeader::TYPE_ARP) {
+    //     ARPMessage arp_message;
+    //     if (arp_message.parse(frame.payload()) == ParseResult::NoError) {
+    //         _arp_table[arp_message.sender_ip_address].ethernet_address = arp_message.sender_ethernet_address;
+    //         _arp_table[arp_message.sender_ip_address].ttl = 30000;
+    //         if (arp_message.opcode == ARPMessage::OPCODE_REQUEST && arp_message.target_ip_address == _ip_address.ipv4_numeric()) {
+    //             ARPMessage arp_reply;
+    //             arp_reply.opcode = ARPMessage::OPCODE_REPLY;
+    //             arp_reply.sender_ethernet_address = _ethernet_address;
+    //             arp_reply.sender_ip_address = _ip_address.ipv4_numeric();
+    //             arp_reply.target_ethernet_address = arp_message.sender_ethernet_address;
+    //             arp_reply.target_ip_address = arp_message.sender_ip_address;
+    //             EthernetFrame rframe;
+    //             rframe.header().dst = arp_message.sender_ethernet_address;
+    //             rframe.header().src = _ethernet_address;
+    //             rframe.header().type = EthernetHeader::TYPE_ARP;
+    //             rframe.payload() = arp_reply.serialize();
+    //             _frames_out.push(std::move(rframe));
+    //         }
+    //         auto it = _pending_datagrams.find(arp_message.sender_ip_address);
+    //         if (it != _pending_datagrams.end()) {
+    //             // exist pending datagrams, so we send them out
+    //             for (const auto &datagram : it->second) {
+    //                 EthernetFrame pframe;
+    //                 pframe.header().dst = arp_message.sender_ethernet_address;
+    //                 pframe.header().src = _ethernet_address;
+    //                 pframe.header().type = EthernetHeader::TYPE_IPv4;
+    //                 pframe.payload() = datagram.serialize();
+    //                 _frames_out.push(std::move(pframe));
+    //             }
+    //             _pending_datagrams.erase(it);
+    //             _arp_request_timers.erase(arp_message.sender_ip_address);
+    //         }
+    //     }
+    // }
+    DUMMY_CODE(frame);
     return {};
 }
 
 //! \param[in] ms_since_last_tick the number of milliseconds since the last call to this method
 void NetworkInterface::tick(const size_t ms_since_last_tick) { 
     // arp tables handling
-    for (auto it = _arp_table.begin(); it != _arp_table.end();) {
-        if (it->second.ttl <= ms_since_last_tick) {
-            it = _arp_table.erase(it);
-        }
-        else {
-            it->second.ttl -= ms_since_last_tick;
-            ++it;
-        }
-    }
-    // arp request timers handling
-    for (auto &[it, timer] : _arp_request_timers) {
-        if (timer <= ms_since_last_tick) {
-            timer = 0;
-        }
-        else {
-            timer -= ms_since_last_tick;
-        }
-    }
-    for (auto &[ip, pender] : _pending_datagrams) {
-        if (pender.empty()) {
-            continue;
-        }
-        auto it = _arp_request_timers.find(ip);
-        if (it == _arp_request_timers.end() || it->second == 0) {
-            // resend the ARP request
-            ARPMessage arp_request;
-            arp_request.opcode = ARPMessage::OPCODE_REQUEST;
-            arp_request.sender_ethernet_address = _ethernet_address;
-            arp_request.sender_ip_address = _ip_address.ipv4_numeric();
-            arp_request.target_ip_address = ip;
-            EthernetFrame frame;
-            frame.header().dst = ETHERNET_BROADCAST;
-            frame.header().src = _ethernet_address;
-            frame.header().type = EthernetHeader::TYPE_ARP;
-            frame.payload() = arp_request.serialize();
-            _frames_out.push(std::move(frame));
-            // timer set
-            _arp_request_timers[ip] = 5000;
-        }
-    }
-    // DUMMY_CODE(ms_since_last_tick); 
+    DUMMY_CODE(ms_since_last_tick); 
 }
