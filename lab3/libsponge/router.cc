@@ -40,6 +40,10 @@ void Router::route_one_datagram(InternetDatagram &dgram) {
     // 提取数值 dest（用于匹配和 next_hop）
     const uint32_t dest_num = dgram.header().dst;
 
+    std::cerr << "DEBUG: dest_num = " << std::hex << dest_num << std::dec << " (expected ~0x01020304 for 1.2.3.4)" << std::endl;
+    // ... 循环 ...
+    std::cerr << "DEBUG: best_length = " << best_length << ", best_prefix = " << std::hex << best_route.prefix << std::dec << std::endl;
+
     // 查找最佳路由
     size_t best_length = 0;
     Route best_route;  // 默认构造（prefix=0，确保不匹配）
