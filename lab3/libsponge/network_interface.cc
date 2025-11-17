@@ -90,23 +90,23 @@ optional<InternetDatagram> NetworkInterface::recv_frame(const EthernetFrame &fra
                 arp_reply.sender_ip_address = _ip_address.ipv4_numeric();
                 arp_reply.target_ethernet_address = arp_message.sender_ethernet_address;
                 arp_reply.target_ip_address = arp_message.sender_ip_address;
-                EthernetFrame frame;
-                frame.header().dst = arp_message.sender_ethernet_address;
-                frame.header().src = _ethernet_address;
-                frame.header().type = EthernetHeader::TYPE_ARP;
-                frame.payload() = arp_reply.serialize();
-                _frames_out.push(std::move(frame));
+                EthernetFrame rframe;
+                rframe.header().dst = arp_message.sender_ethernet_address;
+                rframe.header().src = _ethernet_address;
+                rframe.header().type = EthernetHeader::TYPE_ARP;
+                rframe.payload() = arp_reply.serialize();
+                _frames_out.push(std::move(rframe));
             }
             auto it = _pending_datagrams.find(arp_message.sender_ip_address);
             if (it != _pending_datagrams.end()) {
                 // exist pending datagrams, so we send them out
                 for (const auto &datagram : it->second) {
-                    EthernetFrame frame;
-                    frame.header().dst = arp_message.sender_ethernet_address;
-                    frame.header().src = _ethernet_address;
-                    frame.header().type = EthernetHeader::TYPE_IPv4;
-                    frame.payload() = datagram.serialize();
-                    _frames_out.push(std::move(frame));
+                    EthernetFrame pframe;
+                    pframe.header().dst = arp_message.sender_ethernet_address;
+                    pframe.header().src = _ethernet_address;
+                    pframe.header().type = EthernetHeader::TYPE_IPv4;
+                    pframe.payload() = datagram.serialize();
+                    _frames_out.push(std::move(pframe));
                 }
                 _pending_datagrams.erase(it);
                 _arp_request_timers.erase(arp_message.sender_ip_address);
