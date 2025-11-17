@@ -42,6 +42,15 @@ class AsyncNetworkInterface : public NetworkInterface {
 //! performs longest-prefix-match routing between them.
 class Router {
     //! The router's collection of network interfaces
+    struct Route {
+        uint32_t prefix;
+        uint8_t prefix_length;
+        std::optional<Address> next_hop;
+        size_t interface_num;
+    };
+
+    std::vector<Route> _routes{};
+
     std::vector<AsyncNetworkInterface> _interfaces{};
 
     //! Send a single datagram from the appropriate outbound interface to the next hop,
