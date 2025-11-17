@@ -42,7 +42,7 @@ void Router::route_one_datagram(InternetDatagram &dgram) {
 
     // Find the best (longest prefix) match in the routing table
     size_t best_length = 0;
-    Router::Route best_route;
+    Route best_route;
     for (const auto &r : _routes) {
         // Compute the mask for this prefix length
         const uint32_t mask = 0xFFFFFFFFu << (32 - r.prefix_length);
