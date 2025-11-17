@@ -54,6 +54,7 @@ void Router::route_one_datagram(InternetDatagram &dgram) {
             best_route = r;
         }
     }
+    std::cerr << "DEBUG: best_length = " << best_length << ", best_prefix = " << std::hex << best_route.prefix << std::dec << std::endl;
 
     if (best_length == 0) { return; }  // 无匹配，丢弃
 
@@ -66,7 +67,7 @@ void Router::route_one_datagram(InternetDatagram &dgram) {
 
     // 发送
     _interfaces.at(best_route.interface_num).send_datagram(dgram, next_hop_addr);
-    std::cerr << "DEBUG: best_length = " << best_length << ", best_prefix = " << std::hex << best_route.prefix << std::dec << std::endl;
+    
 }
 
 void Router::route() {
