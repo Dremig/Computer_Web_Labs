@@ -18,7 +18,6 @@ using namespace std;
 template <typename... Targs>
 void DUMMY_CODE(Targs &&... /* unused */) {}
 
-Router::Router() = default;
 
 //! \param[in] route_prefix The "up-to-32-bit" IPv4 address prefix to match the datagram's destination address against
 //! \param[in] prefix_length For this route to be applicable, how many high-order (most-significant) bits of the route_prefix will need to match the corresponding bits of the datagram's destination address?
@@ -31,7 +30,7 @@ void Router::add_route(const uint32_t route_prefix,
     cerr << "DEBUG: adding route " << Address::from_ipv4_numeric(route_prefix).ip() << "/" << int(prefix_length)
          << " => " << (next_hop.has_value() ? next_hop->ip() : "(direct)") << " on interface " << interface_num << "\n";
 
-    _routes.push_back({route_prefix, prefix_length, next_hop, interface_num});
+    _routes.emplace_back(route_prefix, prefix_length, next_hop, interface_num);
     // DUMMY_CODE(route_prefix, prefix_length, next_hop, interface_num);
     // Your code here.
 }
@@ -43,7 +42,7 @@ void Router::route_one_datagram(InternetDatagram &dgram) {
 
     // Find the best (longest prefix) match in the routing table
     size_t best_length = 0;
-    Route best_route;
+    Router::Route best_route;
     for (const auto &r : _routes) {
         // Compute the mask for this prefix length
         const uint32_t mask = 0xFFFFFFFFu << (32 - r.prefix_length);
