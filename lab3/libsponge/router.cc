@@ -42,7 +42,7 @@ void Router::route_one_datagram(InternetDatagram &dgram) {
 
     std::cerr << "DEBUG: dest_num = " << std::hex << dest_num << std::dec << " (expected ~0x01020304 for 1.2.3.4)" << std::endl;
     // ... 循环 ...
-    std::cerr << "DEBUG: best_length = " << best_length << ", best_prefix = " << std::hex << best_route.prefix << std::dec << std::endl;
+
 
     // 查找最佳路由
     size_t best_length = 0;
@@ -66,6 +66,7 @@ void Router::route_one_datagram(InternetDatagram &dgram) {
 
     // 发送
     _interfaces.at(best_route.interface_num).send_datagram(dgram, next_hop_addr);
+    std::cerr << "DEBUG: best_length = " << best_length << ", best_prefix = " << std::hex << best_route.prefix << std::dec << std::endl;
 }
 
 void Router::route() {
