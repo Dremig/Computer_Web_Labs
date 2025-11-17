@@ -38,7 +38,7 @@ void Router::add_route(const uint32_t route_prefix,
 //! \param[in] dgram The datagram to be routed
 void Router::route_one_datagram(InternetDatagram &dgram) {
     // 提取数值 dest（用于匹配和 next_hop）
-    const uint32_t dest_num = dgram.header().dst;
+    const uint32_t dest_num = dgram.header().dst.ipv4_numeric();
 
     std::cerr << "DEBUG: dest_num = " << std::hex << dest_num << std::dec << " (expected ~0x01020304 for 1.2.3.4)" << std::endl;
     // ... 循环 ...
