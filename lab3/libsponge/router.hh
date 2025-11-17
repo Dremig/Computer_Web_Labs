@@ -48,8 +48,12 @@ class Router {
         std::optional<Address> next_hop;
         size_t interface_num;
 
+        // Existing parameterized constructor (uncommented)
         Route(uint32_t p, uint8_t pl, std::optional<Address> nh, size_t in)
-        : prefix(p), prefix_length(pl), next_hop(std::move(nh)), interface_num(in) {}
+                : prefix(p), prefix_length(pl), next_hop(std::move(nh)), interface_num(in) {}
+
+            // NEW: Explicit default constructor
+        Route() : prefix(0), prefix_length(0), next_hop(std::nullopt), interface_num(0) {}
     };
 
     std::vector<Route> _routes{};
