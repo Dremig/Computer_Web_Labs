@@ -38,7 +38,7 @@ void Router::add_route(const uint32_t route_prefix,
 //! \param[in] dgram The datagram to be routed
 void Router::route_one_datagram(InternetDatagram &dgram) {
     // Get the destination IP address from the datagram header
-    const uint32_t dest = dgram.header().dst.ipv4_numeric();
+    auto dest = dgram.header().dst.ipv4_numeric();
 
     // Find the best (longest prefix) match in the routing table
     size_t best_length = 0;
