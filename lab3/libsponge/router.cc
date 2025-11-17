@@ -18,6 +18,8 @@ using namespace std;
 template <typename... Targs>
 void DUMMY_CODE(Targs &&... /* unused */) {}
 
+Router::Router() = default;
+
 //! \param[in] route_prefix The "up-to-32-bit" IPv4 address prefix to match the datagram's destination address against
 //! \param[in] prefix_length For this route to be applicable, how many high-order (most-significant) bits of the route_prefix will need to match the corresponding bits of the datagram's destination address?
 //! \param[in] next_hop The IP address of the next hop. Will be empty if the network is directly attached to the router (in which case, the next hop address should be the datagram's final destination).
