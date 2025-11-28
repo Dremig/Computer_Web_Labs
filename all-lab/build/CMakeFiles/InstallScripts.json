@@ -1,0 +1,11 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/cmake_install.cmake",
+		"/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/libsponge/cmake_install.cmake",
+		"/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/apps/cmake_install.cmake",
+		"/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/tests/cmake_install.cmake",
+		"/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/doctests/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

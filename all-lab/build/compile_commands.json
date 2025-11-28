@@ -1,0 +1,116 @@
+[
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/libsponge",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/sponge.dir/byte_stream.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/byte_stream.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/byte_stream.cc",
+  "output": "libsponge/CMakeFiles/sponge.dir/byte_stream.cc.o"
+},
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/libsponge",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/sponge.dir/util/address.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util/address.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util/address.cc",
+  "output": "libsponge/CMakeFiles/sponge.dir/util/address.cc.o"
+},
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/libsponge",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/sponge.dir/util/buffer.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util/buffer.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util/buffer.cc",
+  "output": "libsponge/CMakeFiles/sponge.dir/util/buffer.cc.o"
+},
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/libsponge",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/sponge.dir/util/eventloop.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util/eventloop.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util/eventloop.cc",
+  "output": "libsponge/CMakeFiles/sponge.dir/util/eventloop.cc.o"
+},
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/libsponge",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/sponge.dir/util/file_descriptor.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util/file_descriptor.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util/file_descriptor.cc",
+  "output": "libsponge/CMakeFiles/sponge.dir/util/file_descriptor.cc.o"
+},
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/libsponge",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/sponge.dir/util/parser.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util/parser.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util/parser.cc",
+  "output": "libsponge/CMakeFiles/sponge.dir/util/parser.cc.o"
+},
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/libsponge",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/sponge.dir/util/socket.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util/socket.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util/socket.cc",
+  "output": "libsponge/CMakeFiles/sponge.dir/util/socket.cc.o"
+},
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/libsponge",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/sponge.dir/util/tun.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util/tun.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util/tun.cc",
+  "output": "libsponge/CMakeFiles/sponge.dir/util/tun.cc.o"
+},
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/libsponge",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/sponge.dir/util/util.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util/util.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util/util.cc",
+  "output": "libsponge/CMakeFiles/sponge.dir/util/util.cc.o"
+},
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/apps",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/webget.dir/webget.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/apps/webget.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/apps/webget.cc",
+  "output": "apps/CMakeFiles/webget.dir/webget.cc.o"
+},
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/tests",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/spongechecks.dir/byte_stream_test_harness.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/tests/byte_stream_test_harness.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/tests/byte_stream_test_harness.cc",
+  "output": "tests/CMakeFiles/spongechecks.dir/byte_stream_test_harness.cc.o"
+},
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/tests",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/byte_stream_construction.dir/byte_stream_construction.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/tests/byte_stream_construction.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/tests/byte_stream_construction.cc",
+  "output": "tests/CMakeFiles/byte_stream_construction.dir/byte_stream_construction.cc.o"
+},
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/tests",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/byte_stream_one_write.dir/byte_stream_one_write.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/tests/byte_stream_one_write.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/tests/byte_stream_one_write.cc",
+  "output": "tests/CMakeFiles/byte_stream_one_write.dir/byte_stream_one_write.cc.o"
+},
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/tests",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/byte_stream_two_writes.dir/byte_stream_two_writes.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/tests/byte_stream_two_writes.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/tests/byte_stream_two_writes.cc",
+  "output": "tests/CMakeFiles/byte_stream_two_writes.dir/byte_stream_two_writes.cc.o"
+},
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/tests",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/byte_stream_capacity.dir/byte_stream_capacity.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/tests/byte_stream_capacity.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/tests/byte_stream_capacity.cc",
+  "output": "tests/CMakeFiles/byte_stream_capacity.dir/byte_stream_capacity.cc.o"
+},
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/tests",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/byte_stream_many_writes.dir/byte_stream_many_writes.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/tests/byte_stream_many_writes.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/tests/byte_stream_many_writes.cc",
+  "output": "tests/CMakeFiles/byte_stream_many_writes.dir/byte_stream_many_writes.cc.o"
+},
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/doctests",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/address_dt.dir/address_dt.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/doctests/address_dt.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/doctests/address_dt.cc",
+  "output": "doctests/CMakeFiles/address_dt.dir/address_dt.cc.o"
+},
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/doctests",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/parser_dt.dir/parser_dt.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/doctests/parser_dt.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/doctests/parser_dt.cc",
+  "output": "doctests/CMakeFiles/parser_dt.dir/parser_dt.cc.o"
+},
+{
+  "directory": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/build/doctests",
+  "command": "/usr/bin/c++  -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/util -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge/tcp_helpers -I/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/libsponge  -std=c++17 -g -pedantic -pedantic-errors -Werror -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wformat=2 -Weffc++ -Wold-style-cast -Wloop-analysis -O3 -DNDEBUG -std=gnu++17 -arch arm64 -o CMakeFiles/socket_dt.dir/socket_dt.cc.o -c /Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/doctests/socket_dt.cc",
+  "file": "/Users/Dremig/stduy/course/web/lab/lab3/ZJU_CS3136M_2025/doctests/socket_dt.cc",
+  "output": "doctests/CMakeFiles/socket_dt.dir/socket_dt.cc.o"
+}
+]
