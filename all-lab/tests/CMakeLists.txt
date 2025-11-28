@@ -16,3 +16,13 @@ add_test_exec (byte_stream_many_writes)
 
 # lab4
 add_test_exec (net_interface)
+
+# lab5
+add_test_exec (fsm_stream_reassembler_cap)
+add_test_exec (fsm_stream_reassembler_single)
+add_test_exec (fsm_stream_reassembler_seq)
+add_test_exec (fsm_stream_reassembler_dup)
+add_test_exec (fsm_stream_reassembler_holes)
+add_test_exec (fsm_stream_reassembler_many)
+add_test_exec (fsm_stream_reassembler_overlapping)
+add_test_exec (fsm_stream_reassembler_win)
