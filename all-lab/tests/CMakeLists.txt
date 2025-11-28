@@ -26,3 +26,8 @@ add_test_exec (fsm_stream_reassembler_holes)
 add_test_exec (fsm_stream_reassembler_many)
 add_test_exec (fsm_stream_reassembler_overlapping)
 add_test_exec (fsm_stream_reassembler_win)
+
+add_test_exec (wrapping_integers_cmp)
+add_test_exec (wrapping_integers_unwrap)
+add_test_exec (wrapping_integers_wrap)
+add_test_exec (wrapping_integers_roundtrip)
