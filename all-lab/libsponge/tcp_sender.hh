@@ -8,13 +8,9 @@
 
 #include <functional>
 #include <queue>
+#include <deque>  // [修改1] 添加 deque 头文件，因为下面使用了 std::deque
 
 //! \brief The "sender" part of a TCP implementation.
-
-//! Accepts a ByteStream, divides it up into segments and sends the
-//! segments, keeps track of which segments are still in-flight,
-//! maintains the Retransmission Timer, and retransmits in-flight
-//! segments if the retransmission timer expires.
 class TCPSender {
   private:
     //! our initial sequence number, the number for our SYN.
@@ -32,6 +28,11 @@ class TCPSender {
 
     //! the (absolute) sequence number for the next byte to be sent
     uint64_t _next_seqno{0};
+
+    // [修改2] 添加 _last_ack_seqno
+    // 用于记录最近一次收到的 ACK 的绝对序列号，用于计算 bytes_in_flight
+    uint64_t _last_ack_seqno{0};
+
     unsigned int _time_elapsed {0};
     bool _timer_running {false};
     unsigned int _consecutive_retransmissions {0};
