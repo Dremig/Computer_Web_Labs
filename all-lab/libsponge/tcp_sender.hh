@@ -15,13 +15,14 @@ class TCPSender {
   private:
     //! our initial sequence number, the number for our SYN.
     WrappingInt32 _isn;
-    unsigned int _current_rto; 
+
+    //! retransmission timer for the connection
+    unsigned int _initial_retransmission_timeout; // <--- 移到这里
 
     //! outbound queue of segments that the TCPSender wants sent
     std::queue<TCPSegment> _segments_out{};
 
-    //! retransmission timer for the connection
-    unsigned int _initial_retransmission_timeout;
+    unsigned int _current_rto; 
 
     //! outgoing stream of bytes that have not yet been sent
     ByteStream _stream;
@@ -29,14 +30,11 @@ class TCPSender {
     //! the (absolute) sequence number for the next byte to be sent
     uint64_t _next_seqno{0};
 
-    // [修改2] 添加 _last_ack_seqno
-    // 用于记录最近一次收到的 ACK 的绝对序列号，用于计算 bytes_in_flight
+    // ... 其他变量保持不变
     uint64_t _last_ack_seqno{0};
-
     unsigned int _time_elapsed {0};
     bool _timer_running {false};
     unsigned int _consecutive_retransmissions {0};
-
     std::deque<TCPSegment> _segments_outstanding {};
     uint16_t _window_size {1};
 
