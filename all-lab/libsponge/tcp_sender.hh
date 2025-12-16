@@ -19,7 +19,6 @@ class TCPSender {
   private:
     //! our initial sequence number, the number for our SYN.
     WrappingInt32 _isn;
-    unsigned int _initial_retransmission_timeout;
     unsigned int _current_rto; 
 
     //! outbound queue of segments that the TCPSender wants sent
