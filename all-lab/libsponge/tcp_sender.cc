@@ -16,12 +16,10 @@ TCPSender::TCPSender(const size_t capacity, const uint16_t retx_timeout, const s
     , _stream(capacity) {}
 
 uint64_t TCPSender::bytes_in_flight() const {
-    // 正在飞行（已发送但未确认）的字节数 = next_seqno - last_ack_seqno
     return _next_seqno - _last_ack_seqno;
 }
 
 void TCPSender::fill_window() {
-    // 如果已经发送了 FIN，就什么都不用做了
     if (_fin_sent) {
         return;
     }
@@ -36,29 +34,21 @@ void TCPSender::fill_window() {
             seg.header().syn = true;
         }
 
-        // 2. 处理 Payload
         size_t window_remain = current_window - bytes_in_flight();
         size_t payload_capacity = window_remain - (seg.header().syn ? 1 : 0);
         
         string payload = _stream.read(min(payload_capacity, TCPConfig::MAX_PAYLOAD_SIZE));
         seg.payload() = Buffer(std::move(payload));
 
-        // 3. 处理 FIN
-        // 条件：
-        // (a) 从没发过 FIN
-        // (b) 流到了 EOF
-        // (c) 窗口还有空间 (seg当前长度 + 1 <= window_remain)
         if (!_fin_sent && _stream.eof() && (seg.length_in_sequence_space() < window_remain)) {
             seg.header().fin = true;
-            _fin_sent = true; // [关键] 标记 FIN 已发送
+            _fin_sent = true; 
         }
 
-        // 4. 停止条件
         if (seg.length_in_sequence_space() == 0) {
             break;
         }
 
-        // 5. 发送
         seg.header().seqno = wrap(_next_seqno, _isn);
         
         _segments_out.push(seg);
@@ -71,7 +61,6 @@ void TCPSender::fill_window() {
             _time_elapsed = 0;
         }
 
-        // 如果发了 FIN，直接退出，不要再循环了
         if (seg.header().fin) {
             break;
         }
@@ -83,7 +72,7 @@ void TCPSender::fill_window() {
 void TCPSender::ack_received(const WrappingInt32 ackno, const uint16_t window_size) {
     uint64_t abs_ack = unwrap(ackno, _isn, _next_seqno);
 
-    // 忽略不可靠的 ACK（确认了还没发的数据）
+    // unacceptable ackno
     if (abs_ack > _next_seqno) {
         return;
     }
@@ -91,21 +80,17 @@ void TCPSender::ack_received(const WrappingInt32 ackno, const uint16_t window_si
     _window_size = window_size;
 
     bool is_new_data = false;
-    
-    // 只有当确认号 > 上一次确认号时，才算确认了新数据
+
     if (abs_ack > _last_ack_seqno) {
         _last_ack_seqno = abs_ack;
         is_new_data = true;
-        
-        // 重置 RTO 和 连续重传计数
+
         _current_rto = _initial_retransmission_timeout;
         _consecutive_retransmissions = 0;
-        
-        // 只有确认了新数据，才重置累计时间
+
         _time_elapsed = 0;
     }
 
-    // 移除已确认的段
     while (!_segments_outstanding.empty()) {
         TCPSegment &seg = _segments_outstanding.front();
         uint64_t seg_len = seg.length_in_sequence_space();
@@ -118,17 +103,13 @@ void TCPSender::ack_received(const WrappingInt32 ackno, const uint16_t window_si
         }
     }
 
-    // 尝试填充窗口
     fill_window();
 
-    // 更新定时器状态
     if (_segments_outstanding.empty()) {
         _timer_running = false;
-        _time_elapsed = 0; // 关闭时清零
+        _time_elapsed = 0; // set to 0 when timer stops
     } else if (is_new_data) {
-        // 如果有未确认数据，且刚才收到了新 ACK，重启定时器
         _timer_running = true;
-        // _time_elapsed 在上面 if (is_new_data) 里已经置 0 了
     }
 }
 
@@ -143,7 +124,6 @@ void TCPSender::tick(const size_t ms_since_last_tick) {
     if (_time_elapsed >= _current_rto && !_segments_outstanding.empty()) {
         _segments_out.push(_segments_outstanding.front());
 
-        // 只有在窗口非0时，才进行指数退避
         if (_window_size > 0) {
             _current_rto *= 2;
         }
