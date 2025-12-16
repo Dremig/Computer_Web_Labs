@@ -19,6 +19,8 @@ class TCPSender {
   private:
     //! our initial sequence number, the number for our SYN.
     WrappingInt32 _isn;
+    unsigned int _initial_retransmission_timeout;
+    unsigned int _current_rto; 
 
     //! outbound queue of segments that the TCPSender wants sent
     std::queue<TCPSegment> _segments_out{};
@@ -31,6 +33,12 @@ class TCPSender {
 
     //! the (absolute) sequence number for the next byte to be sent
     uint64_t _next_seqno{0};
+    unsigned int _time_elapsed {0};
+    bool _timer_running {false};
+    unsigned int _consecutive_retransmissions {0};
+
+    std::deque<TCPSegment> _segments_outstanding {};
+    uint16_t _window_size {1};
 
   public:
     //! Initialize a TCPSender
