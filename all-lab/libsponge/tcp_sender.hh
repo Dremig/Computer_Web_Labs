@@ -15,6 +15,7 @@ class TCPSender {
   private:
     //! our initial sequence number, the number for our SYN.
     WrappingInt32 _isn;
+    bool _fin_sent {false};
 
     //! retransmission timer for the connection
     unsigned int _initial_retransmission_timeout; // <--- 移到这里

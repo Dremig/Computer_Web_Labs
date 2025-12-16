@@ -21,43 +21,44 @@ uint64_t TCPSender::bytes_in_flight() const {
 }
 
 void TCPSender::fill_window() {
-    // 视窗大小为0时视为1（零窗口探测）
+    // 如果已经发送了 FIN，就什么都不用做了
+    if (_fin_sent) {
+        return;
+    }
+
     size_t current_window = _window_size == 0 ? 1 : _window_size;
 
     while (current_window > bytes_in_flight()) {
         TCPSegment seg;
         
-        // 1. 如果还没发过 SYN，加上 SYN 标志
+        // 1. 处理 SYN
         if (_next_seqno == 0) {
             seg.header().syn = true;
         }
 
-        // 2. 计算 payload 还有多少空间
-        // 剩余窗口 = 假定窗口 - 已发送未确认
+        // 2. 处理 Payload
         size_t window_remain = current_window - bytes_in_flight();
-        
-        // 如果 seg 已经带了 SYN，它占用了 1 个序列号
         size_t payload_capacity = window_remain - (seg.header().syn ? 1 : 0);
         
-        // 从流中读取数据，不能超过剩余空间，也不能超过最大载荷
         string payload = _stream.read(min(payload_capacity, TCPConfig::MAX_PAYLOAD_SIZE));
         seg.payload() = Buffer(std::move(payload));
 
-        // 3. 判断能否发送 FIN
+        // 3. 处理 FIN
         // 条件：
-        // (a) 流已经完全结束 (EOF: 输入结束且缓冲读空)
-        // (b) 窗口里还有空间放 FIN (seg目前的长度 + 1 <= window_remain)
-        // 注意：seg.length_in_sequence_space() 此时包含 SYN + Payload 长度
-        if (_stream.eof() && (seg.length_in_sequence_space() < window_remain)) {
+        // (a) 从没发过 FIN
+        // (b) 流到了 EOF
+        // (c) 窗口还有空间 (seg当前长度 + 1 <= window_remain)
+        if (!_fin_sent && _stream.eof() && (seg.length_in_sequence_space() < window_remain)) {
             seg.header().fin = true;
+            _fin_sent = true; // [关键] 标记 FIN 已发送
         }
 
-        // 4. 如果段长度为0（无SYN，无数据，无FIN），说明发不了东西了，退出
+        // 4. 停止条件
         if (seg.length_in_sequence_space() == 0) {
             break;
         }
 
-        // 5. 设置序列号并发送
+        // 5. 发送
         seg.header().seqno = wrap(_next_seqno, _isn);
         
         _segments_out.push(seg);
@@ -65,13 +66,12 @@ void TCPSender::fill_window() {
         
         _next_seqno += seg.length_in_sequence_space();
 
-        // 6. 如果定时器没启动，启动它
         if (!_timer_running) {
             _timer_running = true;
             _time_elapsed = 0;
         }
 
-        // 如果发了 FIN，连接结束，不用再填充了
+        // 如果发了 FIN，直接退出，不要再循环了
         if (seg.header().fin) {
             break;
         }
@@ -158,8 +158,6 @@ unsigned int TCPSender::consecutive_retransmissions() const {
 }
 
 void TCPSender::send_empty_segment() {
-    // 发送一个空的 ACK 段（通常用于回复 ACK 或保活）
-    // 只有 seqno 字段是有意义的
     TCPSegment seg;
     seg.header().seqno = wrap(_next_seqno, _isn);
     _segments_out.push(seg);
