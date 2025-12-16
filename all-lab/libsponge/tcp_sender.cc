@@ -48,7 +48,7 @@ void TCPSender::fill_window() {
         // 如果流结束了，且窗口还有空间容纳 FIN (FIN 占 1 个序号)
         // 窗口剩余空间 >= payload长度 + syn(1/0) + fin(1)
         if (!_stream.eof() && _stream.input_ended() && 
-            (bytes_in_flight() + seg.length_in_sequence_space() < current_window)) {
+            (seg.length_in_sequence_space() < window_remain)) {
             seg.header().fin = true;
         }
 
@@ -96,14 +96,11 @@ void TCPSender::ack_received(const WrappingInt32 ackno, const uint16_t window_si
     
     if (abs_ack > _last_ack_seqno) {
         _last_ack_seqno = abs_ack;
-        is_new_data_acked = true;
-        
-        // 重置重传计数器和 RTO
-        _current_rto = _initial_retransmission_timeout;
+        // 重置 RTO 和 连续重传次数
+        _current_rto = _initial_retransmission_timeout; 
         _consecutive_retransmissions = 0;
-        
-        // 如果有新数据被确认，重置定时器
         _time_elapsed = 0;
+        is_new_data_acked = true;
     }
 
     // 清理重传队列中已经被完全确认的段
@@ -152,10 +149,10 @@ void TCPSender::tick(const size_t ms_since_last_tick) {
         // 如果窗口大小不为0，才进行指数退避（Lab要求）
         // 注意：我们内部把窗口0当作1处理了，这里判断原始窗口大小
         if (_window_size > 0) {
-            _consecutive_retransmissions++;
+
             _current_rto *= 2;
         }
-        
+        _consecutive_retransmissions++;
         // 重置定时器累计时间
         _time_elapsed = 0;
     }
