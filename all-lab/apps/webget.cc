@@ -35,7 +35,7 @@ void get_URL(const string &host, const string &path) {
         cerr << "Error in get_URL: " << e.what() << endl;
         throw;
     }
-    socket.wait_until_closed();
+    // socket.wait_until_closed();
 }
 
 int main(int argc, char *argv[]) {
