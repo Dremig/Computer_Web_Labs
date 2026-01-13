@@ -1,5 +1,5 @@
 add_library (spongechecks STATIC byte_stream_test_harness.cc
-network_interface_test_harness.cc)
+network_interface_test_harness.cc tcp_fsm_test_harness.cc)
 
 macro (add_test_exec exec_name)
     add_executable ("${exec_name}" "${exec_name}.cc")
@@ -46,3 +46,19 @@ add_test_exec (send_ack)
 add_test_exec (send_window)
 add_test_exec (send_close)
 add_test_exec (send_extra)
+
+dd_test_exec (tcp_parser ${LIBPCAP})
+add_test_exec (ipv4_parser ${LIBPCAP})
+add_test_exec (fsm_active_close)
+add_test_exec (fsm_passive_close)
+add_test_exec (fsm_ack_rst_relaxed)
+add_test_exec (fsm_ack_rst_win_relaxed)
+add_test_exec (fsm_connect_relaxed)
+
+add_test_exec (fsm_listen_relaxed)
+add_test_exec (fsm_reorder)
+add_test_exec (fsm_loopback)
+add_test_exec (fsm_loopback_win)
+add_test_exec (fsm_retx_relaxed)
+add_test_exec (fsm_retx_win)
+add_test_exec (fsm_winsize)
