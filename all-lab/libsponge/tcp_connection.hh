@@ -21,6 +21,18 @@ class TCPConnection {
     //! in case the remote TCPConnection doesn't know we've received its whole stream?
     bool _linger_after_streams_finish{true};
     bool _is_active{true};
+    
+    // [新增] 记录距离上次收到 Segment 的时间（用于 tick）
+    size_t _time_since_last_segment_received{0};
+
+    // [新增] 辅助函数：将 Sender 的包搬运到 Connection 的队列，并填充 ACK/Window
+    void _trans_segments_to_out_queue();
+
+    // [新增] 辅助函数：发送 RST 强行断开连接
+    void _send_rst_segment();
+
+    // [新增] 辅助函数：检查是否可以干净地关闭连接
+    void _check_clean_shutdown();
 
   public:
     //! \name "Input" interface for the writer
