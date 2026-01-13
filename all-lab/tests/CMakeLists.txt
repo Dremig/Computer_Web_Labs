@@ -47,7 +47,7 @@ add_test_exec (send_window)
 add_test_exec (send_close)
 add_test_exec (send_extra)
 
-dd_test_exec (tcp_parser ${LIBPCAP})
+add_test_exec (tcp_parser ${LIBPCAP})
 add_test_exec (ipv4_parser ${LIBPCAP})
 add_test_exec (fsm_active_close)
 add_test_exec (fsm_passive_close)
