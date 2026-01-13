@@ -1,4 +1,4 @@
-#include "socket.hh"
+#include "tcp_sponge_socket.hh"
 #include "util.hh"
 
 #include <cstdlib>
@@ -12,7 +12,7 @@ void get_URL(const string &host, const string &path) {
 
     try {
         Address server_addr(host, "http");
-        TCPSocket sock{};
+        FullStackSocket sock{};
         sock.connect(server_addr);
 
         string request = "GET " + path + " HTTP/1.1\r\n"
@@ -35,6 +35,7 @@ void get_URL(const string &host, const string &path) {
         cerr << "Error in get_URL: " << e.what() << endl;
         throw;
     }
+    socket.wait_until_closed();
 }
 
 int main(int argc, char *argv[]) {
